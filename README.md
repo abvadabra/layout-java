@@ -2,8 +2,8 @@
 
 > A simple/fast stacking box layout library. It's useful for calculating layouts for things like 2D user interfaces.
 
-This is a port of randrew's layout rewritten in java, with some java specific additions. It can be used as a layouting engine and serve as a foundation
-for UI in your applications or games.
+This is a port of [randrew's layout](https://github.com/randrew/layout) rewritten in java, with some java specific additions. 
+It can be used as a layouting engine and serve as a foundation for UI in your applications or games.
 
 ![layout-demo](https://user-images.githubusercontent.com/8457835/189464350-4f53ccdb-67ff-465a-b927-d76f9c2dc508.gif)
 
@@ -15,15 +15,6 @@ Demo code is in `demo` module within the root directory. You can build and try i
 git clone https://github.com/abvadabra/layout-java.git
 cd layout-java
 ./gradlew :demo:run
-```
-
-#### Use via Gradle
-```
-implementation "org.layout:layout-java:1.0.0"
-```
-#### Use via Maven 
-```
-TODO
 ```
 
 ### Example

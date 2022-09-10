@@ -1,9 +1,11 @@
 plugins {
     id("java")
+    id("maven-publish")
 }
 
-group = "org.layout"
-version = "1.0-SNAPSHOT"
+group = "io.github.abvadabra"
+version = "1.0.0"
+
 
 repositories {
     mavenCentral()

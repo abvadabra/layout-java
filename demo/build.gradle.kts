@@ -3,7 +3,7 @@ plugins {
     id("application")
 }
 
-group = "org.layout"
+group = "io.github.abvadabra"
 version = "1.0-SNAPSHOT"
 
 application {

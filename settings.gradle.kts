@@ -1,2 +1,2 @@
-rootProject.name = "layout-jvm"
+rootProject.name = "layout-java"
 include("demo")
