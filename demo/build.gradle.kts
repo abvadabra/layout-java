@@ -1,9 +1,14 @@
 plugins {
     id("java")
+    id("application")
 }
 
 group = "org.layout"
 version = "1.0-SNAPSHOT"
+
+application {
+    mainClass.set("org.layout.demo.Main")
+}
 
 repositories {
     mavenCentral()
