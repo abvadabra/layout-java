@@ -20,7 +20,7 @@ public final class LayoutContext {
     }
 
     /**
-     * @see org.layout.Layout#layResetContext)
+     * @see org.layout.Layout#layResetContext
      */
     public void resetContext() {
         Layout.layResetContext(this);
