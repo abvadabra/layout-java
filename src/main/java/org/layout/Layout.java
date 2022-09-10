@@ -70,7 +70,7 @@ public final class Layout {
 
     // endregion
 
-    public static @NotNull LayoutItem layGetItem(@NotNull LayoutContext ctx, int id) {
+    static @NotNull LayoutItem layGetItem(@NotNull LayoutContext ctx, int id) {
         assert id >= 0 && id <= ctx.count;
         return ctx.items[id];
     }
@@ -380,6 +380,22 @@ public final class Layout {
         dst[2] = pitem.marginRight;
         dst[3] = pitem.marginBottom;
         return dst;
+    }
+
+    /**
+     * Get the id of first child of an item, if any. Returns LAY_INVALID_ID if there
+     * is no child.
+     */
+    public static int layFirstChild(@NotNull LayoutContext ctx, int id) {
+        return layGetItem(ctx, id).firstChild;
+    }
+
+    /**
+     * Get the id of the next sibling of an item, if any. Returns LAY_INVALID_ID if
+     * there is no next sibling.
+     */
+    public static int layNextSibling(@NotNull LayoutContext ctx, int id) {
+        return layGetItem(ctx, id).nextSibling;
     }
 
     public static float layGetRectX(@NotNull LayoutContext ctx, int id) {
