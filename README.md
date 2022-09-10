@@ -17,6 +17,24 @@ cd layout-java
 ./gradlew :demo:run
 ```
 
+### How to use
+
+This library is published to maven central. Alternatively, you can download jar file from [Releases](https://github.com/abvadabra/layout-java/releases)
+
+#### Gradle
+```
+implementation("io.github.abvadabra:layout-java:1.0.0")
+```
+#### Maven
+```
+<dependency>
+  <groupId>io.github.abvadabra</groupId>
+  <artifactId>layout-java</artifactId>
+  <version>1.0.0</version>
+  <type>module</type>
+</dependency>
+```
+
 ### Example
 
 API is provided in two slightly different forms, although they both work the same way. One resembles original C-style API with all actions performed 
