@@ -23,7 +23,7 @@ This library is published to maven central. Alternatively, you can download jar 
 
 #### Gradle
 ```
-implementation("io.github.abvadabra:layout-java:1.0.0")
+implementation("io.github.abvadabra:layout-java:1.1.0")
 ```
 #### Maven
 ```

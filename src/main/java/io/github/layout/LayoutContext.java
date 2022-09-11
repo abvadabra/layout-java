@@ -41,14 +41,14 @@ public final class LayoutContext {
     }
 
     /**
-     * @see Layout#layClearItemBreak}
+     * @see Layout#layClearItemBreak
      */
     public void clearItemBreak(int item) {
         Layout.layClearItemBreak(this, item);
     }
 
     /**
-     * @see Layout#layItemsCount}
+     * @see Layout#layItemsCount
      */
     public int itemsCount() {
         return Layout.layItemsCount(this);
