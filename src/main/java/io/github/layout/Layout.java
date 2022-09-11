@@ -1,12 +1,12 @@
-package org.layout;
+package io.github.layout;
 
 import org.intellij.lang.annotations.MagicConstant;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 
-import static org.layout.LayoutBoxFlags.*;
-import static org.layout.LayoutFlags.*;
+import static io.github.layout.LayoutBoxFlags.*;
+import static io.github.layout.LayoutFlags.*;
 
 @SuppressWarnings("unused")
 public final class Layout {

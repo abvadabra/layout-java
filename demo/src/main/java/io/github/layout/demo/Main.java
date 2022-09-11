@@ -1,4 +1,4 @@
-package org.layout.demo;
+package io.github.layout.demo;
 
 import imgui.ImDrawList;
 import imgui.ImGui;
@@ -6,18 +6,16 @@ import imgui.app.Application;
 import imgui.app.Configuration;
 import imgui.flag.ImGuiCond;
 import imgui.type.ImInt;
+import io.github.layout.Layout;
+import io.github.layout.LayoutContext;
 import org.intellij.lang.annotations.MagicConstant;
 import org.jetbrains.annotations.Nullable;
-import org.layout.Layout;
-import org.layout.LayoutBoxFlags;
-import org.layout.LayoutContext;
-import org.layout.LayoutFlags;
+import io.github.layout.LayoutBoxFlags;
+import io.github.layout.LayoutFlags;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import static org.layout.Layout.*;
 
 public class Main extends Application {
 
@@ -62,7 +60,7 @@ public class Main extends Application {
     }
 
     private void draw(float ox, float oy, Component component) {
-        float[] rect = layGetRect(ctx, component.layoutId, new float[4]);
+        float[] rect = Layout.layGetRect(ctx, component.layoutId, new float[4]);
 
         // imgui expects abgr, so we have to convert colors
         int argb = component.color;
@@ -150,9 +148,9 @@ public class Main extends Application {
                     .setMargins(0, 0, 10, 0));
         }
 
-        layResetContext(ctx);
+        Layout.layResetContext(ctx);
         this.root.submitLayout(ctx);
-        layRunContext(ctx);
+        Layout.layRunContext(ctx);
 
     }
 

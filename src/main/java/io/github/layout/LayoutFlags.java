@@ -1,4 +1,4 @@
-package org.layout;
+package io.github.layout;
 
 /**
  * Child layout flags to pass to lay_set_behave()

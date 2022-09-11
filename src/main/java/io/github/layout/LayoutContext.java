@@ -1,4 +1,4 @@
-package org.layout;
+package io.github.layout;
 
 import org.intellij.lang.annotations.MagicConstant;
 
@@ -13,203 +13,203 @@ public final class LayoutContext {
     public LayoutContext() {}
 
     /**
-     * @see org.layout.Layout#layReserveItemsCapacity
+     * @see Layout#layReserveItemsCapacity
      */
     public void reserveItemsCapacity(int count) {
         Layout.layReserveItemsCapacity(this, count);
     }
 
     /**
-     * @see org.layout.Layout#layResetContext
+     * @see Layout#layResetContext
      */
     public void resetContext() {
         Layout.layResetContext(this);
     }
 
     /**
-     * @see org.layout.Layout#layRunContext
+     * @see Layout#layRunContext
      */
     public void runContext() {
         Layout.layRunContext(this);
     }
 
     /**
-     * @see org.layout.Layout#layRunItem
+     * @see Layout#layRunItem
      */
     public void runItem(int item) {
         Layout.layRunItem(this, item);
     }
 
     /**
-     * @see org.layout.Layout#layClearItemBreak}
+     * @see Layout#layClearItemBreak}
      */
     public void clearItemBreak(int item) {
         Layout.layClearItemBreak(this, item);
     }
 
     /**
-     * @see org.layout.Layout#layItemsCount}
+     * @see Layout#layItemsCount}
      */
     public int itemsCount() {
         return Layout.layItemsCount(this);
     }
 
     /**
-     * @see org.layout.Layout#layItemsCapacity
+     * @see Layout#layItemsCapacity
      */
     public int itemsCapacity() {
         return Layout.layItemsCapacity(this);
     }
 
     /**
-     * @see org.layout.Layout#layItem
+     * @see Layout#layItem
      */
     public int item() {
         return Layout.layItem(this);
     }
 
     /**
-     * @see org.layout.Layout#layLastChild
+     * @see Layout#layLastChild
      */
     public int lastChild(int parent) {
         return Layout.layLastChild(this, parent);
     }
 
     /**
-     * @see org.layout.Layout#layInsert
+     * @see Layout#layInsert
      */
     public void insert(int parent, int child) {
         Layout.layInsert(this, parent, child);
     }
 
     /**
-     * @see org.layout.Layout#layAppend
+     * @see Layout#layAppend
      */
     public void append(int earlier, int later) {
         Layout.layAppend(this, earlier, later);
     }
 
     /**
-     * @see org.layout.Layout#layPush
+     * @see Layout#layPush
      */
     public void push(int parent, int newChild) {
         Layout.layPush(this, parent, newChild);
     }
 
     /**
-     * @see org.layout.Layout#laySetSize
+     * @see Layout#laySetSize
      */
     public void setSize(int item, float width, float height) {
         Layout.laySetSize(this, item, width, height);
     }
 
     /**
-     * @see org.layout.Layout#layGetSizeX
+     * @see Layout#layGetSizeX
      */
     public float getSizeX(int item) {
         return Layout.layGetSizeX(this, item);
     }
 
     /**
-     * @see org.layout.Layout#layGetSizeY
+     * @see Layout#layGetSizeY
      */
     public float getSizeY(int item) {
         return Layout.layGetSizeY(this, item);
     }
 
     /**
-     * @see org.layout.Layout#layGetSizeXY
+     * @see Layout#layGetSizeXY
      */
     public float[] getSizeXY(int item, float[] dst) {
         return Layout.layGetSizeXY(this, item, dst);
     }
 
     /**
-     * @see org.layout.Layout#laySetBehave
+     * @see Layout#laySetBehave
      */
     public void setBehave(int item, @MagicConstant(flagsFromClass = LayoutFlags.class) int flags) {
         Layout.laySetBehave(this, item, flags);
     }
 
     /**
-     * @see org.layout.Layout#laySetContain
+     * @see Layout#laySetContain
      */
     public void setContain(int item, @MagicConstant(flagsFromClass = LayoutBoxFlags.class) int flags) {
         Layout.laySetContain(this, item, flags);
     }
 
     /**
-     * @see org.layout.Layout#laySetMargins
+     * @see Layout#laySetMargins
      */
     public void setMargins(int item, float left, float top, float right, float bottom) {
         Layout.laySetMargins(this, item, left, top, right, bottom);
     }
 
     /**
-     * @see org.layout.Layout#layGetMarginsLTRB
+     * @see Layout#layGetMarginsLTRB
      */
     public float[] getMarginsLTRB(int item, float[] dst) {
         return Layout.layGetMarginsLTRB(this, item, dst);
     }
 
     /**
-     * @see org.layout.Layout#layFirstChild
+     * @see Layout#layFirstChild
      */
     public int firstChild(int id) {
         return Layout.layFirstChild(this, id);
     }
 
     /**
-     * @see org.layout.Layout#layNextSibling
+     * @see Layout#layNextSibling
      */
     public int nextSibling(int id) {
         return Layout.layNextSibling(this, id);
     }
 
     /**
-     * @see org.layout.Layout#layGetRectX
+     * @see Layout#layGetRectX
      */
     public float getRectX(int id) {
         return Layout.layGetRectX(this, id);
     }
 
     /**
-     * @see org.layout.Layout#layGetRectY
+     * @see Layout#layGetRectY
      */
     public float getRectY(int id) {
         return Layout.layGetRectY(this, id);
     }
 
     /**
-     * @see org.layout.Layout#layGetRectWidth
+     * @see Layout#layGetRectWidth
      */
     public float getRectWidth(int id) {
         return Layout.layGetRectWidth(this, id);
     }
 
     /**
-     * @see org.layout.Layout#layGetRectHeight
+     * @see Layout#layGetRectHeight
      */
     public float getRectHeight(int id) {
         return Layout.layGetRectHeight(this, id);
     }
 
     /**
-     * @see org.layout.Layout#layGetRect
+     * @see Layout#layGetRect
      */
     public float[] getRect(int id, float[] dst) {
         return Layout.layGetRect(this, id, dst);
     }
 
     /**
-     * @see org.layout.Layout#layCalcSize
+     * @see Layout#layCalcSize
      */
     public void calcSize(int item, int dim) {
         Layout.layCalcSize(this, item, dim);
     }
 
     /**
-     * @see org.layout.Layout#layArrange
+     * @see Layout#layArrange
      */
     public void arrange(int item, int dim) {
         Layout.layArrange(this, item, dim);
