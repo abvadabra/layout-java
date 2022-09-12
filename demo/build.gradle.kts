@@ -7,7 +7,7 @@ group = "io.github.abvadabra"
 version = "1.0-SNAPSHOT"
 
 application {
-    mainClass.set("org.layout.demo.Main")
+    mainClass.set("io.github.layout.demo.Main")
 }
 
 repositories {
