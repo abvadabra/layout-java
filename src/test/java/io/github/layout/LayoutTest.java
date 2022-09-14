@@ -20,6 +20,37 @@ public class LayoutTest {
     }
 
     @Test
+    public void simpleGrowFactors() {
+        int root = ctx.item();
+        int childA = ctx.item();
+        int childB = ctx.item();
+        int childC = ctx.item();
+
+        ctx.setSize(root, 100, 10);
+        ctx.setContain(root, LAY_ROW | LAY_START);
+
+        ctx.setBehave(childA, LAY_FILL);
+        ctx.setBehave(childB, LAY_FILL);
+        ctx.setBehave(childC, LAY_FILL);
+
+        ctx.setGrow(childA, 2);
+        ctx.setGrow(childB, 1);
+        // grow factor for childC not set because by default it should be interpreted as 1
+
+        ctx.insert(root, childA);
+        ctx.insert(root, childB);
+        ctx.insert(root, childC);
+
+        ctx.runContext();
+
+        assertVec4Equals(ctx.getRect(root, new float[4]), 0, 0, 100, 10);
+
+        assertVec4Equals(ctx.getRect(childA, new float[4]), 0, 0, 50, 10);
+        assertVec4Equals(ctx.getRect(childB, new float[4]), 50, 0, 25, 10);
+        assertVec4Equals(ctx.getRect(childC, new float[4]), 75, 0, 25, 10);
+    }
+
+    @Test
     public void simpleFill() {
         int root = Layout.layItem(ctx);
         int child = Layout.layItem(ctx);

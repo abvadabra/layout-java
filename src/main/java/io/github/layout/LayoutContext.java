@@ -97,6 +97,20 @@ public final class LayoutContext {
     }
 
     /**
+     * @see Layout#laySetGrow
+     */
+    public void setGrow(int item, float grow) {
+        Layout.laySetGrow(this, item, grow);
+    }
+
+    /**
+     * @see Layout#layGetGrow
+     */
+    public float getGrow(int item) {
+        return Layout.layGetGrow(this, item);
+    }
+
+    /**
      * @see Layout#laySetSize
      */
     public void setSize(int item, float width, float height) {

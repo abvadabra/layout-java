@@ -284,6 +284,27 @@ public final class Layout {
     }
 
     /**
+     * Set flex grow factor of an item. When combined with HFILL/VFILL/FILL grow factor
+     * defines weight of an item when parent distributes free space between children.
+     * For example, if all items have grow factor of 1, the remaining space in the container will be
+     * distributed equally to all children. If one the children has grow factor of 2, that child will
+     * take up twice as much of the space as either one of the others.
+     * Grow factor of 0 (by default) will be interpreted as 1. Negative values are invalid.
+     */
+    public static void laySetGrow(@NotNull LayoutContext ctx, int item, float grow) {
+        LayoutItem pitem = layGetItem(ctx, item);
+        pitem.grow = grow;
+    }
+
+    /**
+     * Gets the grow factor of an item which was set with setGrow
+     */
+    public static float layGetGrow(@NotNull LayoutContext ctx, int item) {
+        LayoutItem pitem = layGetItem(ctx, item);
+        return pitem.grow;
+    }
+
+    /**
      * Sets the size of an item
      */
     public static void laySetSize(@NotNull LayoutContext ctx, int item, float width, float height) {
@@ -579,7 +600,7 @@ public final class Layout {
         int startChild = pitem.firstChild;
         while (startChild != LAY_INVALID_ID) {
             float used = 0F;
-            int count = 0; // count of fillers
+            float sumOfFillers = 0; // sum of grow factors of fillers
             int squeezedCount = 0; // count of squeezable elements
             int total = 0;
             boolean hardbreak = false;
@@ -596,7 +617,7 @@ public final class Layout {
                 LayoutContext.LayoutRect childRect = ctx.rects[child];
                 float extend = used;
                 if((flags & LAY_HFILL) == LAY_HFILL) {
-                    ++count;
+                    sumOfFillers += pchild.grow == 0F ? 1F : pchild.grow;
                     extend += childRect.get(dim) + pchild.margins(wdim);
                 } else {
                     if((fflags & LAY_ITEM_HFIXED) != LAY_ITEM_HFIXED) {
@@ -619,15 +640,12 @@ public final class Layout {
             }
 
             float extraSpace = space - used;
-            float filler = 0F;
             float spacer = 0F;
             float extraMargin = 0F;
             float eater = 0F;
 
             if (extraSpace > 0) {
-                if(count > 0) {
-                    filler = extraSpace / (float)count;
-                } else if(total > 0) {
+                if(sumOfFillers <= 0F && total > 0) {
                     switch (itemFlags & LAY_JUSTIFY) {
                         case LAY_JUSTIFY:
                             // justify when not wrapping or not in last line,
@@ -665,7 +683,7 @@ public final class Layout {
 
                 x += childRect.get(dim) + extraMargin;
                 if((flags & LAY_HFILL) == LAY_HFILL) { // grow
-                    x1 = x + filler;
+                    x1 = x + extraSpace * (pchild.grow == 0F ? 1F : pchild.grow) / sumOfFillers;
                 } else if((fflags & LAY_ITEM_HFIXED) == LAY_ITEM_HFIXED) {
                     x1 = x + childRect.get(2 + dim);
                 } else { // squeeze
@@ -833,6 +851,7 @@ public final class Layout {
         item.marginBottom = 0.0F;
         item.sizeX = 0.0F;
         item.sizeY = 0.0F;
+        item.grow = 0F;
     }
 
     private static void _clearRect(@NotNull LayoutContext.LayoutRect rect) {
@@ -847,6 +866,7 @@ public final class Layout {
         int nextSibling;
         float marginLeft, marginTop, marginRight, marginBottom;
         float sizeX, sizeY;
+        float grow;
 
         LayoutItem() {}
 
