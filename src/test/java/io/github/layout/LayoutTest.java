@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,6 +18,86 @@ public class LayoutTest {
     @BeforeEach
     public void setup() {
         ctx = new LayoutContext();
+    }
+
+    @Test
+    public void simpleMinWidth1() {
+        int root = ctx.item();
+        ctx.setSize(root, 100, 10);
+        ctx.setBehave(root, LAY_HGROW | LAY_VGROW);
+        ctx.setContain(root, LAY_ROW | LAY_JUSTIFY);
+
+        int left = ctx.item();
+        ctx.setSize(left, 70, 10);
+        ctx.insert(root, left);
+
+        int spacer = ctx.item();
+        ctx.setSize(spacer, 10, 20);
+        ctx.insert(root, spacer);
+
+        int right = ctx.item();
+        ctx.setSize(right, 30, 10);
+        ctx.insert(root, right);
+
+        ctx.runContext();
+
+        // root should grow to fit all children
+        // left and right should be properly moved by vertical axis
+        assertVec4Equals(ctx.getRect(root, new float[4]), 0, 0, 110, 20);
+        assertVec4Equals(ctx.getRect(left, new float[4]), 0, 5, 70, 10);
+        assertVec4Equals(ctx.getRect(spacer, new float[4]), 70, 0, 10, 20);
+        assertVec4Equals(ctx.getRect(right, new float[4]), 80, 5, 30, 10);
+    }
+
+    @Test
+    public void simpleMinWidth2() {
+        int root = ctx.item();
+        ctx.setSize(root, 100, 10);
+        ctx.setBehave(root, LAY_HGROW | LAY_VGROW);
+        ctx.setContain(root, LAY_ROW | LAY_JUSTIFY);
+
+        int left = ctx.item();
+        ctx.setSize(left, 30, 10);
+        ctx.insert(root, left);
+
+        int spacer = ctx.item();
+        ctx.setBehave(spacer, LAY_HFILL | LAY_VFILL);
+        ctx.insert(root, spacer);
+
+        int right = ctx.item();
+        ctx.setSize(right, 30, 10);
+        ctx.insert(root, right);
+
+        ctx.runContext();
+
+        // root can grow, but all children should fit without extending root
+        assertVec4Equals(ctx.getRect(root, new float[4]), 0, 0, 100, 10);
+        assertVec4Equals(ctx.getRect(left, new float[4]), 0, 0, 30, 10);
+        assertVec4Equals(ctx.getRect(spacer, new float[4]), 30, 0, 40, 10);
+        assertVec4Equals(ctx.getRect(right, new float[4]), 70, 0, 30, 10);
+    }
+
+    @Test
+    public void simpleOverlayed() {
+        int root = ctx.item();
+        ctx.setSize(root, 100, 100);
+        ctx.setContain(root, LAY_LAYOUT);
+
+        int leftA = ctx.item();
+        ctx.setSize(leftA, 30, 0);
+        ctx.setBehave(leftA, LAY_VFILL | LAY_LEFT);
+        ctx.insert(root, leftA);
+
+        int leftB = ctx.item();
+        ctx.setSize(leftB, 50, 0);
+        ctx.setBehave(leftB, LAY_VFILL | LAY_LEFT);
+        ctx.insert(root, leftB);
+
+        ctx.runContext();
+
+        assertVec4Equals(ctx.getRect(root, new float[4]), 0, 0, 100, 100);
+        assertVec4Equals(ctx.getRect(leftA, new float[4]), 0, 0, 30, 100);
+        assertVec4Equals(ctx.getRect(leftB, new float[4]), 0, 0, 50, 100);
     }
 
     @Test

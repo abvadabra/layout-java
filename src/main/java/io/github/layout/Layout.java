@@ -43,7 +43,7 @@ public final class Layout {
     /**
      * bit 5-9
      */
-    public static final int LAY_ITEM_LAYOUT_MASK = 0x0003E0;
+    public static final int LAY_ITEM_LAYOUT_MASK = 0x00C3E0;
     /**
      * item has been inserted (bit 10)
      */
@@ -542,9 +542,13 @@ public final class Layout {
 
         // If we have an explicit input size, just set our output size (which other
         // calcSize and arrange procedures will us) to it.
-        if(pitem.size(dim) != 0) {
-            ctx.rects[item].set(2 + dim, pitem.size(dim));
-            return;
+        if (pitem.size(dim) != 0) {
+            // however, an item might be allowed to grow, in which case should go on and compute the size
+            if ((dim == 0 && (pitem.flags & LAY_HGROW) != LAY_HGROW)
+                    || (dim == 1 && (pitem.flags & LAY_VGROW) != LAY_VGROW)) {
+                ctx.rects[item].set(2 + dim, pitem.size(dim));
+                return;
+            }
         }
 
         // Calculate our size based on children items. Note that we've already
@@ -580,6 +584,16 @@ public final class Layout {
                 // layout model
                 calSize = layCalcOverlayedSize(ctx, item, dim);
                 break;
+        }
+
+        // Item shouldn't shrink when limited by size
+        if(pitem.size(dim) != 0) {
+            if (dim == 0 && (pitem.flags & LAY_HGROW) == LAY_HGROW) {
+                calSize = Math.max(pitem.size(dim), calSize);
+            }
+            if (dim == 1 && (pitem.flags & LAY_VGROW) == LAY_VGROW) {
+                calSize = Math.max(pitem.size(dim), calSize);
+            }
         }
 
         // Set our output data size. Will be used by parent calc_size procedures.,

@@ -34,6 +34,14 @@ public final class LayoutFlags {
      */
     public static final int LAY_VFILL = 0x140;
     /**
+     * Size which was set for the item will be treated as minimal width
+     */
+    public static final int LAY_HGROW = 0x4000;
+    /**
+     * Size which was set for the item will be treated as minimal height
+     */
+    public static final int LAY_VGROW = 0x8000;
+    /**
      * Aenter horizontally, with left margin as offset
      */
     public static final int LAY_HCENTER = 0x000;
