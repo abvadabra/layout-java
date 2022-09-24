@@ -23,14 +23,14 @@ This library is published to maven central. Alternatively, you can download jar 
 
 #### Gradle
 ```
-implementation("io.github.abvadabra:layout-java:1.2.0")
+implementation("io.github.abvadabra:layout-java:1.3.1")
 ```
 #### Maven
 ```
 <dependency>
   <groupId>io.github.abvadabra</groupId>
   <artifactId>layout-java</artifactId>
-  <version>1.2.0</version>
+  <version>1.3.1</version>
   <type>module</type>
 </dependency>
 ```
