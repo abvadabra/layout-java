@@ -181,6 +181,13 @@ public final class LayoutContext {
     }
 
     /**
+     * @see Layout#layGetFlags
+     */
+    public int getFlags(int id) {
+        return Layout.layGetFlags(this, id);
+    }
+
+    /**
      * @see Layout#layGetRectX
      */
     public float getRectX(int id) {

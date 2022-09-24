@@ -60,6 +60,10 @@ public final class Layout {
      * bit 11-12
      */
     public static final int LAY_ITEM_FIXED_MASK  = LAY_ITEM_HFIXED | LAY_ITEM_VFIXED;
+    /**
+     * grow factor has been explicitly set (bit 13)
+     */
+    public static final int LAY_ITEM_GROW_SET    = 0x2000;
 
     /**
      * which flag bits will be compared
@@ -294,6 +298,7 @@ public final class Layout {
     public static void laySetGrow(@NotNull LayoutContext ctx, int item, float grow) {
         LayoutItem pitem = layGetItem(ctx, item);
         pitem.grow = grow;
+        pitem.flags |= LAY_ITEM_GROW_SET;
     }
 
     /**
@@ -417,6 +422,13 @@ public final class Layout {
      */
     public static int layNextSibling(@NotNull LayoutContext ctx, int id) {
         return layGetItem(ctx, id).nextSibling;
+    }
+
+    /**
+     * Returns item flags, which were set both by user code, and by internal layout code
+     */
+    public static int layGetFlags(@NotNull LayoutContext ctx, int id) {
+        return layGetItem(ctx, id).flags;
     }
 
     public static float layGetRectX(@NotNull LayoutContext ctx, int id) {
@@ -631,7 +643,7 @@ public final class Layout {
                 LayoutContext.LayoutRect childRect = ctx.rects[child];
                 float extend = used;
                 if((flags & LAY_HFILL) == LAY_HFILL) {
-                    sumOfFillers += pchild.grow == 0F ? 1F : pchild.grow;
+                    sumOfFillers += (pchild.flags & LAY_ITEM_GROW_SET) == LAY_ITEM_GROW_SET ? pchild.grow : 1F;
                     extend += childRect.get(dim) + pchild.margins(wdim);
                 } else {
                     if((fflags & LAY_ITEM_HFIXED) != LAY_ITEM_HFIXED) {
@@ -697,7 +709,7 @@ public final class Layout {
 
                 x += childRect.get(dim) + extraMargin;
                 if((flags & LAY_HFILL) == LAY_HFILL) { // grow
-                    x1 = x + extraSpace * (pchild.grow == 0F ? 1F : pchild.grow) / sumOfFillers;
+                    x1 = x + extraSpace * ((pchild.flags & LAY_ITEM_GROW_SET) == LAY_ITEM_GROW_SET ? pchild.grow : 1F) / sumOfFillers;
                 } else if((fflags & LAY_ITEM_HFIXED) == LAY_ITEM_HFIXED) {
                     x1 = x + childRect.get(2 + dim);
                 } else { // squeeze
